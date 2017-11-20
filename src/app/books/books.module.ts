@@ -9,12 +9,16 @@ import { BookService } from './book.service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryBookService } from './in-mem/in-memory-book.service';
 import { BookListComponent } from './list/book-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TagInputModule,
+    BrowserAnimationsModule,
     NgbModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryBookService)

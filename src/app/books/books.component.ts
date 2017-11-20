@@ -49,12 +49,7 @@ export class BooksComponent implements OnInit {
   }
 
   resetBookForm() {
-    this.book = {
-      id: null,
-      title: '',
-      iban: '',
-      authors: ['']
-    };
+    this.book = new Book();
   }
 
   private updateBooks(bookToUpdate: Book) {

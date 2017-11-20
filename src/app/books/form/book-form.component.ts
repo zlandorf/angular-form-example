@@ -23,7 +23,7 @@ export class BookFormComponent implements OnChanges {
       id: formBuilder.control({value: null, disabled: true}),
       iban: formBuilder.control('', [Validators.required]),
       title: formBuilder.control('', [Validators.required]),
-      authors: formBuilder.array([])
+      authors: formBuilder.group([], [])
     });
   }
 
