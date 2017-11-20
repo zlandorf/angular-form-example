@@ -2,20 +2,31 @@ import { NgModule } from '@angular/core';
 import { BooksComponent } from './books.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BookFormComponent } from './form/book-form.component';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { BookService } from './book.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryBookService } from './in-mem/in-memory-book.service';
 
 @NgModule({
-  declarations: [
-    BooksComponent,
-  ],
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryBookService)
+  ],
+  declarations: [
+    BooksComponent,
+    BookFormComponent,
   ],
   exports: [
     BooksComponent
   ],
   providers: [
+    BookService
   ]
 })
 export class BooksModule {}
