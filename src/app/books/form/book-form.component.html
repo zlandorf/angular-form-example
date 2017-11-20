@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+<form [formGroup]="form" novalidate>
   <input type="hidden" id="inputId" class="form-control" placeholder="Id" formControlName="id">
 
   <div class="form-group row">
@@ -40,7 +40,12 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-    Save
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="submit()">
+    {{ book.id === null ? 'Create' : 'Update' }}
   </button>
+
+  <button type="button" class="btn btn-danger" (click)="reset()">
+    Reset
+  </button>
+
 </form>

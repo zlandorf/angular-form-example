@@ -21,23 +21,16 @@ export class BookService {
     return this.http.get<Book[]>(this.booksUrl);
   }
 
-  save(book: Book): Observable<Book> {
-    if (book.id == null) {
-      return this.create(book);
-    }
-    return this.update(book);
-  }
-
   delete(book: Book): Observable<any> {
     return this.http.delete(`${this.booksUrl}/${book.id}`);
   }
 
-  private create(book: Book): Observable<Book> {
+  create(book: Book): Observable<Book> {
     return this.http.post<Book>(this.booksUrl, book, httpOptions);
   }
 
-  private update(book: Book): Observable<Book> {
-    return this.http.put<Book>(this.booksUrl, book, httpOptions);
+  update(book: Book): Observable<void> {
+    return this.http.put<void>(this.booksUrl, book, httpOptions);
   }
 
 }

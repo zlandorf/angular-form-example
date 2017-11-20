@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookService } from './book.service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryBookService } from './in-mem/in-memory-book.service';
+import { BookListComponent } from './list/book-list.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { InMemoryBookService } from './in-mem/in-memory-book.service';
   declarations: [
     BooksComponent,
     BookFormComponent,
+    BookListComponent
   ],
   exports: [
     BooksComponent

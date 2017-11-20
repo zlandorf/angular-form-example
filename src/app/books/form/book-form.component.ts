@@ -14,6 +14,7 @@ export class BookFormComponent implements OnChanges {
 
   @Input() book: Book;
   @Output() onSubmit = new EventEmitter<Book>();
+  @Output() onReset = new EventEmitter();
 
   private form: FormGroup;
 
@@ -24,11 +25,12 @@ export class BookFormComponent implements OnChanges {
       title: formBuilder.control('', [Validators.required]),
       authors: formBuilder.array([])
     });
-    this.addAuthor('');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.form.reset();
+    this.authors.controls = [];
+
     if (this.book != null) {
       this.book.authors.forEach(author => this.addAuthor(author));
       this.form.setValue(this.book);
@@ -41,6 +43,10 @@ export class BookFormComponent implements OnChanges {
     }
     const value = this.form.getRawValue();
     this.onSubmit.emit(value);
+  }
+
+  reset() {
+    this.onReset.emit();
   }
 
   get authors(): FormArray {

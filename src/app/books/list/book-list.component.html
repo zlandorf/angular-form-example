@@ -1,0 +1,16 @@
+<div class="list-group">
+  <div
+    *ngFor="let book of books"
+    (click)="selectBook(book)"
+    class="list-group-item list-group-item-action flex-column align-items-start"
+    [class.active]="book.id === selectedBook?.id"
+  >
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ book.title }}</h5>
+      <small>{{ book.iban }}</small>
+    </div>
+    <p class="mb-1">
+      {{ book.authors.join(', ') }}
+    </p>
+  </div>
+</div>

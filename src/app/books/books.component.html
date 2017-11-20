@@ -1,5 +1,5 @@
 
-<div>
-  There are {{books.length}} books.
+<div class="mt-2 mb-2">
+  <app-book-list [books]="books" (onBookClicked)="onBookSelected($event)" [selectedBook]="book"></app-book-list>
 </div>
-<app-book-form (onSubmit)="onBookSubmitted($event)"></app-book-form>
+<app-book-form (onSubmit)="onBookSubmitted($event)" (onReset)="resetBookForm()" [book]="book"></app-book-form>

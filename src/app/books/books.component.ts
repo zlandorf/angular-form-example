@@ -12,12 +12,14 @@ import { BookService } from './book.service';
 })
 export class BooksComponent implements OnInit {
 
-  private books: Book[] = [];
+  books: Book[] = [];
+  book: Book = null;
 
   constructor(private service: BookService) {
   }
 
   ngOnInit(): void {
+    this.resetBookForm();
     this.service.list()
       .catch(err => {
         console.log('Failed to retrieve the list of books', err);
@@ -26,13 +28,37 @@ export class BooksComponent implements OnInit {
       .subscribe(books => this.books = books);
   }
 
-  onBookSubmitted(book: Book) {
-    this.service.save(book)
-      .subscribe(savedBook => {
-        console.log('New book added', savedBook);
-        this.books.push(savedBook);
-      }, error => {
-        console.log('Failed to save the book', error);
-      });
+  onBookSubmitted(submittedBook: Book) {
+    if (submittedBook.id !== null) {
+      this.service.update(submittedBook).subscribe(
+        () => this.updateBooks(submittedBook),
+        error => console.log('Failed to update the book', error),
+        () => this.resetBookForm()
+      );
+    } else {
+      this.service.create(submittedBook).subscribe(
+        book => this.books.push(book),
+        error => console.log('Failed to create the book', error),
+        () => this.resetBookForm()
+      );
+    }
   }
+
+  onBookSelected(book: Book) {
+    this.book = book;
+  }
+
+  resetBookForm() {
+    this.book = {
+      id: null,
+      title: '',
+      iban: '',
+      authors: ['']
+    };
+  }
+
+  private updateBooks(bookToUpdate: Book) {
+    this.books = this.books.map(book => book.id === bookToUpdate.id ? bookToUpdate : book);
+  }
+
 }
